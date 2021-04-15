@@ -8,10 +8,14 @@ import io.ebay.imagegallery.data.model.ImageDetail
 import io.ebay.imagegallery.databinding.ActivityVehicleDetailBinding
 import io.ebay.imagegallery.di.component.ActivityComponent
 import io.ebay.imagegallery.ui.base.BaseActivity
+import javax.inject.Inject
 
 class VehicleDetailActivity : BaseActivity<VehicleDetailViewModel>() {
 
     lateinit var binding: ActivityVehicleDetailBinding
+
+    @Inject
+    lateinit var circularProgressDrawable: CircularProgressDrawable
 
     override fun provideLayoutView(): View {
         binding = ActivityVehicleDetailBinding.inflate(layoutInflater)
@@ -34,18 +38,11 @@ class VehicleDetailActivity : BaseActivity<VehicleDetailViewModel>() {
         Glide
             .with(applicationContext)
             .load(imageDetail.highResURL)
-            .placeholder(circularProgressBar())
+            .placeholder(circularProgressDrawable)
             .into(binding.ivHighRes)
     }
 
 
-    private fun circularProgressBar() : CircularProgressDrawable {
-        return CircularProgressDrawable(this).apply {
-            strokeWidth = 5f
-            centerRadius = 50f
-        }.also {
-            it.start()
-        }
-    }
+
 
 }

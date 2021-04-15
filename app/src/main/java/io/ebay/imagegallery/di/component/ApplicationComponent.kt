@@ -2,6 +2,7 @@ package io.ebay.imagegallery.di.component
 
 import android.app.Application
 import android.content.Context
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import dagger.Component
 import io.ebay.imagegallery.ImageGalleryApp
 import io.ebay.imagegallery.data.remote.NetworkService
@@ -33,4 +34,6 @@ interface ApplicationComponent {
     fun getSchedulerProvider(): SchedulerProvider
 
     fun getCompositeDisposable(): CompositeDisposable
+
+    fun getCircularProgressDrawable(): CircularProgressDrawable
 }

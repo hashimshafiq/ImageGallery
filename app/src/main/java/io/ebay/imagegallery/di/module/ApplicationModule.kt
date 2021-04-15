@@ -2,6 +2,7 @@ package io.ebay.imagegallery.di.module
 
 import android.app.Application
 import android.content.Context
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import dagger.Module
 import dagger.Provides
 import io.ebay.imagegallery.BuildConfig
@@ -46,4 +47,14 @@ class ApplicationModule(private val application : ImageGalleryApp) {
 
     @Provides
     fun provideSchedulerProvider(): SchedulerProvider = RxSchedulerProvider()
+
+    @Provides
+    fun providesCircularProgressBar() : CircularProgressDrawable {
+        return CircularProgressDrawable(application).apply {
+            strokeWidth = 5f
+            centerRadius = 50f
+        }.also {
+            it.start()
+        }
+    }
 }
