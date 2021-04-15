@@ -1,6 +1,8 @@
 package io.ebay.imagegallery.di.module
 
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import dagger.Module
 import dagger.Provides
 import io.ebay.imagegallery.data.repository.VehicleRepository
@@ -14,6 +16,14 @@ import io.reactivex.disposables.CompositeDisposable
 
 @Module
 class ActivityModule(private val activity : BaseActivity<*>) {
+
+    companion object {
+        const val SPAN_COUNT = 2
+        const val ORIENTATION = StaggeredGridLayoutManager.VERTICAL
+    }
+
+    @Provides
+    fun provideStaggeredGridLayoutManager(): StaggeredGridLayoutManager = StaggeredGridLayoutManager(SPAN_COUNT,ORIENTATION)
 
 
     @Provides

@@ -6,4 +6,5 @@
     <string name="network_server_not_available">Our services are under maintenance, please retry after some time
     </string>
     <string name="server_connection_error">Not able to connect, please retry again</string>
+    <string name="image_content_description">Vehicle Image</string>
 </resources>

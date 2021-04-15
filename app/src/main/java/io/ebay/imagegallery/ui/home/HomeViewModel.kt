@@ -1,6 +1,9 @@
 package io.ebay.imagegallery.ui.home
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import io.ebay.imagegallery.R
+import io.ebay.imagegallery.data.model.ImageDetail
 import io.ebay.imagegallery.data.repository.VehicleRepository
 import io.ebay.imagegallery.ui.base.BaseViewModel
 import io.ebay.imagegallery.utils.common.Resource
@@ -16,6 +19,13 @@ class HomeViewModel(
 
     ) : BaseViewModel(schedulerProvider, compositeDisposable, networkHelper) {
 
+    private var detailImages = arrayListOf<ImageDetail>()
+
+    private val _detailImageLiveData : MutableLiveData<Resource<List<ImageDetail>>> = MutableLiveData()
+
+    val detailImageLiveData: LiveData<Resource<List<ImageDetail>>>
+        get() = _detailImageLiveData
+
 
     override fun onCreate() {
         fetchVehicleDetails()
@@ -25,16 +35,22 @@ class HomeViewModel(
     private fun fetchVehicleDetails(){
 
         if (checkInternetConnection()) {
-
+            _detailImageLiveData.postValue(Resource.loading())
             compositeDisposable.addAll(
                 vehicleRepository.fetchCarDetails()
                     .subscribeOn(schedulerProvider.io())
                     .subscribe(
-                        {
-                            messageString.postValue(Resource.success("Successfull"))
+                        {  vehicleDetailResponse ->
+                            detailImages.clear()
+                            vehicleDetailResponse.images.forEach { vehicleImage ->
+                                detailImages.add(ImageDetail("https://${vehicleImage.uri}_2.jpg", "https://${vehicleImage.uri}_27.jpg"))
+                            }
+
+                            _detailImageLiveData.postValue(Resource.success(detailImages))
                         },
                         {
                             handleNetworkError(it)
+                            _detailImageLiveData.postValue(Resource.error())
                         }
                     )
                 )
