@@ -2,6 +2,7 @@ package io.ebay.imagegallery.ui.detail
 
 import android.os.Bundle
 import android.view.View
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import io.ebay.imagegallery.data.model.ImageDetail
 import io.ebay.imagegallery.databinding.ActivityVehicleDetailBinding
@@ -26,11 +27,25 @@ class VehicleDetailActivity : BaseActivity<VehicleDetailViewModel>() {
         val imageDetail = intent.extras?.getParcelable<ImageDetail>("data")
             ?: throw IllegalArgumentException("post must be non-null")
 
+
+
+
+
         Glide
             .with(applicationContext)
             .load(imageDetail.highResURL)
-
+            .placeholder(circularProgressBar())
             .into(binding.ivHighRes)
+    }
+
+
+    private fun circularProgressBar() : CircularProgressDrawable {
+        return CircularProgressDrawable(this).apply {
+            strokeWidth = 5f
+            centerRadius = 50f
+        }.also {
+            it.start()
+        }
     }
 
 }
