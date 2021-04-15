@@ -19,6 +19,11 @@ import javax.inject.Singleton
 @Module
 class ApplicationModule(private val application : ImageGalleryApp) {
 
+    companion object {
+        const val STROKE_WIDTH = 5f
+        const val CENTER_RADIUS = 50f
+    }
+
     @Singleton
     @Provides
     fun provideApplication(): Application = application
@@ -39,7 +44,7 @@ class ApplicationModule(private val application : ImageGalleryApp) {
         Networking.create(
             BuildConfig.BASE_URL,
             application.cacheDir,
-            10*1024*1024 //10MB
+            cacheSize = 10*1024*1024
         )
 
     @Provides
@@ -51,8 +56,8 @@ class ApplicationModule(private val application : ImageGalleryApp) {
     @Provides
     fun providesCircularProgressBar() : CircularProgressDrawable {
         return CircularProgressDrawable(application).apply {
-            strokeWidth = 5f
-            centerRadius = 50f
+            strokeWidth = STROKE_WIDTH
+            centerRadius = CENTER_RADIUS
         }.also {
             it.start()
         }

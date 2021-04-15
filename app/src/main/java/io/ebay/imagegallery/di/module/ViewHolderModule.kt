@@ -13,7 +13,4 @@ class ViewHolderModule(private val viewHolder: BaseItemViewHolder<*, *>) {
     @ViewModelScope
     fun provideLifecycleRegistry(): LifecycleRegistry = LifecycleRegistry(viewHolder)
 
-
-
-
 }
