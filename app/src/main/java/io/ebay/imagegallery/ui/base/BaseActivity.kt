@@ -19,7 +19,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies(buildActivityComponent())
         super.onCreate(savedInstanceState)
-        setContentView(provideLayoutId())
+        setContentView(provideLayoutView())
         setupObservers()
         setupView(savedInstanceState)
         viewModel.onCreate()
@@ -58,7 +58,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
 
 
-    protected abstract fun provideLayoutId(): View
+    protected abstract fun provideLayoutView(): View
 
     protected abstract fun injectDependencies(activityComponent: ActivityComponent)
 

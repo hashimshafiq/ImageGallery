@@ -63,6 +63,7 @@ dependencies {
 
     // Dagger
     implementation "com.google.dagger:dagger:2.29.1"
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     kapt "com.google.dagger:dagger-compiler:2.29.1"
 
     // ViewModel
