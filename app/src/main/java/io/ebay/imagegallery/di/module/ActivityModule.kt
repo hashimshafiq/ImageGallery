@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import io.ebay.imagegallery.data.repository.VehicleRepository
 import io.ebay.imagegallery.ui.base.BaseActivity
+import io.ebay.imagegallery.ui.detail.VehicleDetailViewModel
 import io.ebay.imagegallery.ui.home.HomeViewModel
 import io.ebay.imagegallery.utils.ViewModelProviderFactory
 import io.ebay.imagegallery.utils.network.NetworkHelper
@@ -37,6 +38,19 @@ class ActivityModule(private val activity : BaseActivity<*>) {
         ViewModelProviderFactory(HomeViewModel::class) {
             HomeViewModel(schedulerProvider, compositeDisposable, networkHelper,vehicleRepository)
         }).get(HomeViewModel::class.java)
+
+
+    @Provides
+    fun providesVehicleDetailViewModel(
+        schedulerProvider: SchedulerProvider,
+        compositeDisposable: CompositeDisposable,
+        networkHelper: NetworkHelper
+
+    ): VehicleDetailViewModel = ViewModelProvider(
+        activity,
+        ViewModelProviderFactory(VehicleDetailViewModel::class) {
+            VehicleDetailViewModel(schedulerProvider, compositeDisposable, networkHelper)
+        }).get(VehicleDetailViewModel::class.java)
 
 
 }

@@ -1,13 +1,16 @@
 package io.ebay.imagegallery.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.ebay.imagegallery.R
 import io.ebay.imagegallery.data.model.ImageDetail
 import io.ebay.imagegallery.databinding.ActivityHomeBinding
 import io.ebay.imagegallery.di.component.ActivityComponent
 import io.ebay.imagegallery.ui.base.BaseActivity
+import io.ebay.imagegallery.ui.detail.VehicleDetailActivity
 import io.ebay.imagegallery.ui.home.list.VehicleAdapter
 import io.ebay.imagegallery.utils.common.Status
 import javax.inject.Inject
@@ -34,7 +37,15 @@ class HomeActivity : BaseActivity<HomeViewModel>() {
 
         vehicleAdapter = VehicleAdapter(this.lifecycle, arrayListOf()) { imageDetail, imageView ->
 
-            showMessage("Clicked")
+            val intent = Intent(this, VehicleDetailActivity::class.java)
+            intent.putExtra("data", imageDetail)
+
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this,
+                imageView,
+                imageView.transitionName
+            )
+            startActivity(intent, options.toBundle())
 
 
         }

@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ImageGallery"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.detail.VehicleDetailActivity"></activity>
         <activity android:name=".ui.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
