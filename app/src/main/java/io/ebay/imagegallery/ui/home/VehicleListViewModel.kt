@@ -49,7 +49,7 @@ class VehicleListViewModel(
                         {  vehicleDetailResponse ->
                             detailImages.clear()
                             vehicleDetailResponse.images.forEach { vehicleImage ->
-                                detailImages.add(ImageDetail("https://${vehicleImage.uri}_2.jpg", "https://${vehicleImage.uri}_27.jpg"))
+                                detailImages.add(ImageDetail(vehicleImage.uri.getThumbnailURLLink(), vehicleImage.uri.getHighResImageURL()))
                             }
 
                             _detailImageLiveData.postValue(Resource.success(detailImages))
@@ -66,4 +66,6 @@ class VehicleListViewModel(
         }
 
     }
+
+
 }
