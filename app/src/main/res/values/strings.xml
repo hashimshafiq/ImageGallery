@@ -9,4 +9,5 @@
     <string name="image_content_description">Vehicle Image</string>
     <string name="no_internet_icon">No Internet Icon</string>
     <string name="retry">Retry</string>
+    <string name="detail">Detail</string>
 </resources>

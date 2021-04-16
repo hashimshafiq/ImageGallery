@@ -6,6 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".ui.detail.VehicleDetailActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"
+            app:expandedTitleGravity="top"
+            >
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/onlyIcon"
+                app:icon="@drawable/ic_action_back"
+                android:id="@+id/btnBack"
+                />
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detail"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+
+                />
+
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <ImageView
         android:id="@+id/ivHighRes"
         android:layout_width="match_parent"

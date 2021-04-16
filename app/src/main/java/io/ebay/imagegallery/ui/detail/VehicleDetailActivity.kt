@@ -32,14 +32,16 @@ class VehicleDetailActivity : BaseActivity<VehicleDetailViewModel>() {
             ?: throw IllegalArgumentException("post must be non-null")
 
 
-
-
-
         Glide
             .with(applicationContext)
             .load(imageDetail.highResURL)
             .placeholder(circularProgressDrawable)
             .into(binding.ivHighRes)
+
+
+        binding.btnBack.setOnClickListener {
+            goBack()
+        }
     }
 
 
