@@ -109,14 +109,4 @@ abstract class BaseAdapter<T : Any, VH : BaseItemViewHolder<T, out BaseItemViewM
         notifyDataSetChanged()
     }
 
-//    fun appendData(dataList: List<T>) {
-//         val diff = DiffCalculation.calculate(this.dataList, dataList, { oldDataCopy, newDataCopy ->
-//            oldDataCopy.addAll(newDataCopy)
-//            return@calculate oldDataCopy
-//        }, { item ->  item.hashCode().toString() as Differentiable})
-//
-//        this.dataList.clear()
-//        this.dataList.addAll(diff.cumulative)
-//        diff.result.dispatchUpdatesTo(this)
-//    }
 }

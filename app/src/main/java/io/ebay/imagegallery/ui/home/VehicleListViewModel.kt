@@ -28,6 +28,7 @@ class VehicleListViewModel(
         get() = _detailImageLiveData
 
     private val _noInternetLayout : MutableLiveData<Event<Boolean>> = MutableLiveData()
+
     val noInternetLayout : LiveData<Event<Boolean>>
         get() = _noInternetLayout
 

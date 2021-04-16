@@ -29,7 +29,7 @@ class VehicleDetailActivity : BaseActivity<VehicleDetailViewModel>() {
     override fun setupView(savedInstanceState: Bundle?) {
 
         val highResImageURL = intent.extras?.getString("data")
-            ?: throw IllegalArgumentException("String must be non-null")
+            ?: throw IllegalArgumentException("url must be non-null")
 
 
         Glide

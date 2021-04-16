@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import io.ebay.imagegallery.R
 import io.ebay.imagegallery.databinding.ActivityVehicleListBinding
 import io.ebay.imagegallery.databinding.CustomNoInternetLayoutBinding
 import io.ebay.imagegallery.di.component.ActivityComponent
@@ -72,7 +71,7 @@ class VehicleListActivity : BaseActivity<VehicleListViewModel>() {
             when(it.status){
                 Status.SUCCESS -> {
                     binding.progressBar.visibility = View.GONE
-                    it.data?.let { thumbnailList ->  vehicleAdapter.appendData(thumbnailList) }
+                    it.data?.let { thumbnailList ->  vehicleAdapter.updateData(thumbnailList) }
                 }
                 Status.LOADING -> {
                     binding.progressBar.visibility = View.VISIBLE
