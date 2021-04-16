@@ -6,8 +6,8 @@ import android.view.View
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.ebay.imagegallery.R
-import io.ebay.imagegallery.data.model.ImageDetail
-import io.ebay.imagegallery.databinding.ActivityHomeBinding
+import io.ebay.imagegallery.databinding.ActivityVehicleListBinding
+import io.ebay.imagegallery.databinding.CustomNoInternetLayoutBinding
 import io.ebay.imagegallery.di.component.ActivityComponent
 import io.ebay.imagegallery.ui.base.BaseActivity
 import io.ebay.imagegallery.ui.detail.VehicleDetailActivity
@@ -15,17 +15,20 @@ import io.ebay.imagegallery.ui.home.list.VehicleAdapter
 import io.ebay.imagegallery.utils.common.Status
 import javax.inject.Inject
 
-class HomeActivity : BaseActivity<HomeViewModel>() {
+class VehicleListActivity : BaseActivity<VehicleListViewModel>() {
 
-    private lateinit var binding: ActivityHomeBinding
+    private lateinit var binding: ActivityVehicleListBinding
+    private lateinit var noInternetBinding: CustomNoInternetLayoutBinding
 
     @Inject
     lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
 
+
     lateinit var vehicleAdapter: VehicleAdapter
 
     override fun provideLayoutView(): View {
-        binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding = ActivityVehicleListBinding.inflate(layoutInflater)
+        noInternetBinding = binding.noInternetLayout
         return binding.root
     }
 
@@ -56,6 +59,10 @@ class HomeActivity : BaseActivity<HomeViewModel>() {
             adapter = vehicleAdapter
         }
 
+        noInternetBinding.btnRetry.setOnClickListener {
+            viewModel.fetchVehicleDetails()
+        }
+
     }
 
     override fun setupObservers() {
@@ -71,12 +78,27 @@ class HomeActivity : BaseActivity<HomeViewModel>() {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 Status.ERROR -> {
-                    showMessage(it.data.toString())
+                    binding.progressBar.visibility = View.GONE
                 }
                 Status.UNKNOWN -> {
-                    showMessage(R.string.network_default_error)
+                    binding.progressBar.visibility = View.GONE
                 }
 
+            }
+        })
+
+        viewModel.noInternetLayout.observe(this,{
+            it.getIfNotHandled()?.run {
+                if (this){
+                    noInternetBinding.root.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                    binding.rvVehicleThumbnails.visibility = View.GONE
+
+                }else{
+                    noInternetBinding.root.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.rvVehicleThumbnails.visibility = View.VISIBLE
+                }
             }
         })
     }

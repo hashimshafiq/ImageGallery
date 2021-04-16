@@ -1,14 +1,13 @@
 package io.ebay.imagegallery.di.module
 
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import dagger.Module
 import dagger.Provides
 import io.ebay.imagegallery.data.repository.VehicleRepository
 import io.ebay.imagegallery.ui.base.BaseActivity
 import io.ebay.imagegallery.ui.detail.VehicleDetailViewModel
-import io.ebay.imagegallery.ui.home.HomeViewModel
+import io.ebay.imagegallery.ui.home.VehicleListViewModel
 import io.ebay.imagegallery.utils.ViewModelProviderFactory
 import io.ebay.imagegallery.utils.network.NetworkHelper
 import io.ebay.imagegallery.utils.rx.SchedulerProvider
@@ -33,11 +32,11 @@ class ActivityModule(private val activity : BaseActivity<*>) {
         compositeDisposable: CompositeDisposable,
         networkHelper: NetworkHelper,
         vehicleRepository: VehicleRepository
-    ): HomeViewModel = ViewModelProvider(
+    ): VehicleListViewModel = ViewModelProvider(
         activity,
-        ViewModelProviderFactory(HomeViewModel::class) {
-            HomeViewModel(schedulerProvider, compositeDisposable, networkHelper,vehicleRepository)
-        }).get(HomeViewModel::class.java)
+        ViewModelProviderFactory(VehicleListViewModel::class) {
+            VehicleListViewModel(schedulerProvider, compositeDisposable, networkHelper,vehicleRepository)
+        }).get(VehicleListViewModel::class.java)
 
 
     @Provides

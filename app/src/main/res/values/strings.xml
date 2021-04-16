@@ -7,4 +7,6 @@
     </string>
     <string name="server_connection_error">Not able to connect, please retry again</string>
     <string name="image_content_description">Vehicle Image</string>
+    <string name="no_internet_icon">No Internet Icon</string>
+    <string name="retry">Retry</string>
 </resources>

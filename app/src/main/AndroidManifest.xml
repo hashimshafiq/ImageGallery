@@ -15,7 +15,7 @@
         android:theme="@style/Theme.ImageGallery"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.detail.VehicleDetailActivity"></activity>
-        <activity android:name=".ui.home.HomeActivity">
+        <activity android:name=".ui.home.VehicleListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

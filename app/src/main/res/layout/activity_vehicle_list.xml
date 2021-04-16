@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeActivity">
+    tools:context=".ui.home.VehicleListActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -68,6 +68,11 @@
         tools:visibility="visible"
         android:id="@+id/progressBar"
         />
+
+    <include
+        android:id="@+id/noInternetLayout"
+        layout="@layout/custom_no_internet_layout"
+        android:visibility="gone"/>
 
 
 

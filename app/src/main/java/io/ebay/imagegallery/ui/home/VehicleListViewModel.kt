@@ -6,12 +6,13 @@ import io.ebay.imagegallery.R
 import io.ebay.imagegallery.data.model.ImageDetail
 import io.ebay.imagegallery.data.repository.VehicleRepository
 import io.ebay.imagegallery.ui.base.BaseViewModel
+import io.ebay.imagegallery.utils.common.Event
 import io.ebay.imagegallery.utils.common.Resource
 import io.ebay.imagegallery.utils.network.NetworkHelper
 import io.ebay.imagegallery.utils.rx.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 
-class HomeViewModel(
+class VehicleListViewModel(
     schedulerProvider: SchedulerProvider,
     compositeDisposable: CompositeDisposable,
     networkHelper: NetworkHelper,
@@ -26,15 +27,20 @@ class HomeViewModel(
     val detailImageLiveData: LiveData<Resource<List<ImageDetail>>>
         get() = _detailImageLiveData
 
+    private val _noInternetLayout : MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val noInternetLayout : LiveData<Event<Boolean>>
+        get() = _noInternetLayout
+
 
     override fun onCreate() {
         fetchVehicleDetails()
     }
 
 
-    private fun fetchVehicleDetails(){
+    fun fetchVehicleDetails(){
 
         if (checkInternetConnection()) {
+            _noInternetLayout.postValue(Event(false))
             _detailImageLiveData.postValue(Resource.loading())
             compositeDisposable.addAll(
                 vehicleRepository.fetchCarDetails()
@@ -56,15 +62,8 @@ class HomeViewModel(
                 )
 
         }else{
-            messageStringId.postValue(Resource.error(R.string.network_connection_error))
+            _noInternetLayout.postValue(Event(true))
         }
-
-
-
-
-
-
-
 
     }
 }
