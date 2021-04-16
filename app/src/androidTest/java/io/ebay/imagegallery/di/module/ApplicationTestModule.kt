@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import io.ebay.imagegallery.BuildConfig
 import io.ebay.imagegallery.ImageGalleryApp
+import io.ebay.imagegallery.data.remote.FakeNetworkService
 import io.ebay.imagegallery.data.remote.NetworkService
 import io.ebay.imagegallery.data.remote.Networking
 import io.ebay.imagegallery.di.ApplicationContext
@@ -40,11 +41,7 @@ class ApplicationTestModule(private val application : ImageGalleryApp) {
     @Singleton
     @Provides
     fun providesNetworkService() : NetworkService =
-            Networking.create(
-                    BuildConfig.BASE_URL,
-                    application.cacheDir,
-                    cacheSize = 10*1024*1024
-            )
+            FakeNetworkService()
 
     @Provides
     fun provideCompositeDisposable(): CompositeDisposable = CompositeDisposable()
