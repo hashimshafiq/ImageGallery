@@ -28,13 +28,13 @@ class VehicleDetailActivity : BaseActivity<VehicleDetailViewModel>() {
 
     override fun setupView(savedInstanceState: Bundle?) {
 
-        val imageDetail = intent.extras?.getParcelable<ImageDetail>("data")
+        val highResImageURL = intent.extras?.getString("data")
             ?: throw IllegalArgumentException("post must be non-null")
 
 
         Glide
             .with(applicationContext)
-            .load(imageDetail.highResURL)
+            .load(highResImageURL)
             .placeholder(circularProgressDrawable)
             .into(binding.ivHighRes)
 

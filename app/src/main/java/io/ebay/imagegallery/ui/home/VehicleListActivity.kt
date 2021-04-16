@@ -41,7 +41,7 @@ class VehicleListActivity : BaseActivity<VehicleListViewModel>() {
         vehicleAdapter = VehicleAdapter(this.lifecycle, arrayListOf()) { imageDetail, imageView ->
 
             val intent = Intent(this, VehicleDetailActivity::class.java)
-            intent.putExtra("data", imageDetail)
+            intent.putExtra("data", imageDetail.highResURL)
 
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this,
